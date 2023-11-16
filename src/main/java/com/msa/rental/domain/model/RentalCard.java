@@ -16,16 +16,16 @@ public class RentalCard {
 	private RentalCardNo rentalCardNo;
 	private IDName member;
 	private RentStatus rentStatus;
-	private LateFee latefee;
+	private LateFee lateFee;
 	private List<RentalItem> rentalItemList = new ArrayList<RentalItem>();
 	private List<ReturnItem> returnItemList = new ArrayList<ReturnItem>();
 
 	@Builder
-	public RentalCard(RentalCardNo rentalCardNo, IDName member, RentStatus rentStatus, LateFee latefee, List<RentalItem> rentalItemList, List<ReturnItem> returnItemList) {
+	public RentalCard(RentalCardNo rentalCardNo, IDName member, RentStatus rentStatus, LateFee lateFee, List<RentalItem> rentalItemList, List<ReturnItem> returnItemList) {
 		this.rentalCardNo = rentalCardNo;
 		this.member = member;
 		this.rentStatus = rentStatus;
-		this.latefee = latefee;
+		this.lateFee = lateFee;
 		this.rentalItemList = rentalItemList;
 		this.returnItemList = returnItemList;
 	}
@@ -47,7 +47,7 @@ public class RentalCard {
 				.rentalCardNo(RentalCardNo.createRentalCardNo())
 				.member(creator)
 				.rentStatus(RentStatus.RENT_AVAILABLE)
-				.latefee(LateFee.createLateFee())
+				.lateFee(LateFee.createLateFee())
 				.build();
 		return rentalCard;
 	}
@@ -78,7 +78,7 @@ public class RentalCard {
 	private void calculateLateFee(RentalItem rentalItem, LocalDate returnDate) {
 		if (returnDate.compareTo(rentalItem.getOverdueDate()) > 0) {
 			long point = Period.between(rentalItem.getOverdueDate(), returnDate).getDays() * 10;
-			this.latefee.addPoint(point);
+			this.lateFee.addPoint(point);
 		}
 	}
 
@@ -95,18 +95,18 @@ public class RentalCard {
 		if (this.rentalItemList.size() != 0) {
 			throw new IllegalArgumentException("모든 도서가 반납되어야 정지를 해제할 수 있습니다.");
 		}
-		if (this.getLatefee().getPoint() != point) {
+		if (this.getLateFee().getPoint() != point) {
 			throw new IllegalArgumentException("해당 포인트로 연체를 해제할");
 		}
 
-		this.changeLateFee(latefee.removePoint(point));
-		if (this.getLatefee().getPoint() == 0) {
+		this.changeLateFee(lateFee.removePoint(point));
+		if (this.getLateFee().getPoint() == 0) {
 			this.rentStatus = RentStatus.RENT_AVAILABLE;
 		}
-		return this.getLatefee().getPoint();
+		return this.getLateFee().getPoint();
 	}
 
 	private void changeLateFee(LateFee changedLateFee) {
-		this.latefee = changedLateFee;
+		this.lateFee = changedLateFee;
 	}
 }
