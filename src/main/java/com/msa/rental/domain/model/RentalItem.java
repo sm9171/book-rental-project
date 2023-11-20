@@ -7,13 +7,13 @@ import java.time.LocalDate;
 @Getter
 public class RentalItem {
 	private Item item;
-	private LocalDate rendDate;
+	private LocalDate rentDate;
 	private boolean overdue;
 	private LocalDate overdueDate;
 
-	public RentalItem(Item item, LocalDate rendDate, boolean overdue, LocalDate overdueDate) {
+	public RentalItem(Item item, LocalDate rentDate, boolean overdue, LocalDate overdueDate) {
 		this.item = item;
-		this.rendDate = rendDate;
+		this.rentDate = rentDate;
 		this.overdue = overdue;
 		this.overdueDate = overdueDate;
 	}

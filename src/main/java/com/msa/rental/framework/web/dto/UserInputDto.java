@@ -7,5 +7,5 @@ import lombok.Setter;
 @Getter
 public class UserInputDto {
 	private String userId;
-	private String userNo;
+	private String userNm;
 }
