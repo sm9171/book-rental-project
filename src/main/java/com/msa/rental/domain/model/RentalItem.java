@@ -1,11 +1,18 @@
 package com.msa.rental.domain.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.time.LocalDate;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Embeddable
 public class RentalItem {
+	@Embedded
 	private Item item;
 	private LocalDate rentDate;
 	private boolean overdue;

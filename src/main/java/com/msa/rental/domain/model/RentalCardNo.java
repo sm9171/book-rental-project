@@ -4,12 +4,15 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RentalCardNo {
+@Embeddable
+public class RentalCardNo implements Serializable {
 	private String no;
 
 	public RentalCardNo(String no) {

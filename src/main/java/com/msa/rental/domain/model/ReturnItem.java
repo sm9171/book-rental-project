@@ -4,11 +4,15 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Embeddable
 public class ReturnItem {
+	@Embedded
 	private RentalItem rentalItem;
 	private LocalDate returnDate;
 
