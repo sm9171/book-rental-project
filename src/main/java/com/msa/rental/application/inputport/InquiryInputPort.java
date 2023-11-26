@@ -5,7 +5,7 @@ import com.msa.rental.application.usecase.InquiryUsecase;
 import com.msa.rental.framework.web.dto.RentItemOutputDTO;
 import com.msa.rental.framework.web.dto.RentalCardOutputDTO;
 import com.msa.rental.framework.web.dto.ReturnItemOutputDTO;
-import com.msa.rental.framework.web.dto.UserInputDto;
+import com.msa.rental.framework.web.dto.UserInputDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,13 +22,13 @@ public class InquiryInputPort implements InquiryUsecase {
     private final RentalCardOutputPort rentalCardOutputPort;
 
     @Override
-    public Optional<RentalCardOutputDTO> getRentalCard(UserInputDto userInputDto) {
+    public Optional<RentalCardOutputDTO> getRentalCard(UserInputDTO userInputDto) {
         return rentalCardOutputPort.loadRentalCard(userInputDto.getUserId())
                 .map(RentalCardOutputDTO::mapToDTO);
     }
 
     @Override
-    public Optional<List<RentItemOutputDTO>> getAllRentItem(UserInputDto userInputDto) {
+    public Optional<List<RentItemOutputDTO>> getAllRentItem(UserInputDTO userInputDto) {
         return rentalCardOutputPort.loadRentalCard(userInputDto.getUserId())
                 .map(loadCard -> loadCard.getRentalItemList()
                         .stream()
@@ -37,7 +37,7 @@ public class InquiryInputPort implements InquiryUsecase {
     }
 
     @Override
-    public Optional<List<ReturnItemOutputDTO>> getAllReturnItem(UserInputDto userInputDto) {
+    public Optional<List<ReturnItemOutputDTO>> getAllReturnItem(UserInputDTO userInputDto) {
         return rentalCardOutputPort.loadRentalCard(userInputDto.getUserId())
                 .map(loadCard -> loadCard.getReturnItemList()
                         .stream()
