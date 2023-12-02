@@ -25,7 +25,7 @@ public class RentalController {
     private final ClearOverdueItemUsecase clearOverdueItemUsecase;
 
     @ApiOperation(value = "도서카드 생성",notes = "사용자정보 -> 도서카드정보")
-    @PostMapping("/RentalCard/")
+    @PostMapping("/RentalCard")
     public ResponseEntity<RentalCardOutputDTO> createRentalCard(@RequestBody UserInputDTO userInputDTO) {
         RentalCardOutputDTO createdRentalCard = createRentalCardUsecase.createRentalCard(userInputDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdRentalCard);
@@ -52,10 +52,8 @@ public class RentalController {
     }
     @ApiOperation(value = "대여기능",notes = "사용자정보,아이템정보1 -> 도서카드정보 ")
     @PostMapping("/rental-card/rent")
-    public ResponseEntity<RentalCardOutputDTO> rentItem(@RequestBody
-                                                        UserItemInputDTO userItemInputDTO) throws Exception {
-        RentalCardOutputDTO resultDTO=
-                rentItemUsecase.rentItem(userItemInputDTO);
+    public ResponseEntity<RentalCardOutputDTO> rentItem(@RequestBody UserItemInputDTO userItemInputDTO) throws Exception {
+        RentalCardOutputDTO resultDTO= rentItemUsecase.rentItem(userItemInputDTO);
         return ResponseEntity.ok(resultDTO);
     }
     @ApiOperation(value = "반납기능",notes = "사용자정보,아이템정보1 -> 도서카드정보 ")

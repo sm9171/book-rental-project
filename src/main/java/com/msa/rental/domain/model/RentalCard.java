@@ -59,7 +59,10 @@ public class RentalCard {
 				.member(creator)
 				.rentStatus(RentStatus.RENT_AVAILABLE)
 				.lateFee(LateFee.createLateFee())
+				.rentalItemList(new ArrayList<>())
+				.returnItemList(new ArrayList<>())
 				.build();
+
 		return rentalCard;
 	}
 
@@ -79,7 +82,7 @@ public class RentalCard {
 	}
 
 	public RentalCard returnItem(Item item, LocalDate returnDate) {
-		RentalItem rentalItem = this.rentalItemList.stream().filter(i -> i.getItem().equals(item)).findFirst().get();
+		RentalItem rentalItem = this.rentalItemList.stream().filter(i -> i.getItem().getNo().equals(item.getNo())).findFirst().get();
 		calculateLateFee(rentalItem, returnDate);
 		this.addReturnItem(ReturnItem.createReturnItem(rentalItem));
 		this.removeRentalItem(rentalItem);
@@ -94,7 +97,7 @@ public class RentalCard {
 	}
 
 	public RentalCard overdueItem(Item item) {
-		RentalItem rentalItem = this.rentalItemList.stream().filter(i -> i.getItem().equals(item)).findFirst().get();
+		RentalItem rentalItem = this.rentalItemList.stream().filter(i -> i.getItem().getNo().equals(item.getNo())).findFirst().get();
 		rentalItem.changeOverdue(true);
 		this.rentStatus = RentStatus.RENT_UNAVAILABLE;
 		rentalItem.changeOverdueDate(LocalDate.now().minusDays(1));

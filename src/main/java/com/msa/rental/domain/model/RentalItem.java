@@ -3,12 +3,14 @@ package com.msa.rental.domain.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public class RentalItem {
